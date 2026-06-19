@@ -4,14 +4,32 @@ const navLinks = document.querySelector(".nav-links");
 menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
 });
-
-document
-.getElementById("joinForm")
-.addEventListener("submit", function(e){
+document.getElementById("joinForm").addEventListener("submit", function(e) {
 
     e.preventDefault();
 
-    alert("Thank you for joining Sibanye (We Are One).");
+    const name = document.querySelector('input[placeholder="Full Name"]').value;
+    const email = document.querySelector('input[placeholder="Email Address"]').value;
+    const phone = document.querySelector('input[placeholder="Phone Number"]').value;
+    const ward = document.querySelector('input[placeholder="Area / Ward"]').value;
+
+    const message =
+`*NEW SIBANYE MEMBER REGISTRATION*
+
+👤 Full Name: ${name}
+
+📧 Email: ${email}
+
+📱 Phone: ${phone}
+
+📍 Area / Ward: ${ward}
+
+I support the registration of Sibanye (We Are One).`;
+
+    const whatsappURL =
+    `https://wa.me/27760262725?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL, "_blank");
 });
 
 
