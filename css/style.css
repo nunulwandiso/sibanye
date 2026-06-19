@@ -305,3 +305,16 @@ footer{
 
 }
 
+.btn-whatsapp{
+    background:#25D366;
+    color:white;
+    padding:12px 24px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-block;
+    transition:.3s;
+}
+
+.btn-whatsapp:hover{
+    transform:translateY(-2px);
+}
