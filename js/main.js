@@ -4,34 +4,31 @@ const navLinks = document.querySelector(".nav-links");
 menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
 });
+
 document.getElementById("joinForm").addEventListener("submit", function(e) {
 
     e.preventDefault();
 
-    const name = document.querySelector('input[placeholder="Full Name"]').value;
-    const email = document.querySelector('input[placeholder="Email Address"]').value;
-    const phone = document.querySelector('input[placeholder="Phone Number"]').value;
-    const ward = document.querySelector('input[placeholder="Area / Ward"]').value;
+    const name = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const ward = document.getElementById("ward").value;
 
     const message =
 `*NEW SIBANYE MEMBER REGISTRATION*
 
 👤 Full Name: ${name}
-
 📧 Email: ${email}
-
 📱 Phone: ${phone}
-
 📍 Area / Ward: ${ward}
 
 I support the registration of Sibanye (We Are One).`;
 
-    const whatsappURL =
-    `https://wa.me/27760262725?text=${encodeURIComponent(message)}`;
-
-    window.open(whatsappURL, "_blank");
+    window.open(
+        `https://wa.me/27760262725?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
 });
-
 
 // COUNTER FUNCTION
 function animateCounter(id, target, duration) {
