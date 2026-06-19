@@ -46,7 +46,7 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !hasAnimated) {
             hasAnimated = true;
-            animateCounter("memberCount", 15, 1500);
+            animateCounter("memberCount", 240, 1500);
         }
     });
 }, {
