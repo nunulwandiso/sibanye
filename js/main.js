@@ -1,71 +1,75 @@
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
+const menuToggle=document.querySelector(".menu-toggle");
+const navLinks=document.querySelector(".nav-links");
 
-menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+if(menuToggle&&navLinks){
+menuToggle.addEventListener("click",()=>{
+const isOpen=navLinks.classList.toggle("active");
+menuToggle.setAttribute("aria-expanded",isOpen);
+menuToggle.setAttribute("aria-label",isOpen?"Close navigation menu":"Open navigation menu");
+menuToggle.textContent=isOpen?"✕":"☰";
 });
+navLinks.querySelectorAll("a").forEach(link=>{
+link.addEventListener("click",()=>{
+navLinks.classList.remove("active");
+menuToggle.setAttribute("aria-expanded","false");
+menuToggle.setAttribute("aria-label","Open navigation menu");
+menuToggle.textContent="☰";
+});
+});
+}
 
-document.getElementById("joinForm").addEventListener("submit", function(e) {
+const joinForm=document.getElementById("joinForm");
 
-    e.preventDefault();
+if(joinForm){
+joinForm.addEventListener("submit",function(e){
+e.preventDefault();
 
-    const name = document.getElementById("fullName").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const ward = document.getElementById("ward").value;
+const name=document.getElementById("fullName").value.trim();
+const email=document.getElementById("email").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const ward=document.getElementById("ward").value.trim();
+const interest=document.getElementById("interest").value;
 
-    const message =
-`*NEW SIBANYE MEMBER REGISTRATION*
+const message=`*SIBANYE COMMUNITY ENGAGEMENT*
 
 👤 Full Name: ${name}
 📧 Email: ${email}
 📱 Phone: ${phone}
 📍 Area / Ward: ${ward}
+🤝 Interest: ${interest}
 
-I support the registration of Sibanye (We Are One).`;
+I would like to support and engage with Sibanye (We Are One).
 
-    window.open(
-        `https://wa.me/27760262725?text=${encodeURIComponent(message)}`,
-        "_blank"
-    );
+*Officially Registered Political Party*`;
+
+const whatsappURL=`https://wa.me/27760262725?text=${encodeURIComponent(message)}`;
+
+window.open(whatsappURL,"_blank","noopener,noreferrer");
 });
-
-// COUNTER FUNCTION
-function animateCounter(id, target, duration) {
-    const element = document.getElementById(id);
-    let startTime = null;
-
-    function updateCounter(currentTime) {
-        if (!startTime) startTime = currentTime;
-
-        const progress = currentTime - startTime;
-        const increment = Math.min(progress / duration, 1);
-
-        element.textContent = Math.floor(increment * target);
-
-        if (increment < 1) {
-            requestAnimationFrame(updateCounter);
-        }
-    }
-
-    requestAnimationFrame(updateCounter);
 }
 
-
-// TRIGGER WHEN SECTION IS VISIBLE
-const counterSection = document.querySelector(".counter-section");
-
-let hasAnimated = false;
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-            hasAnimated = true;
-            animateCounter("memberCount", 240, 1500);
-        }
-    });
-}, {
-    threshold: 0.5
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+link.addEventListener("click",function(e){
+const targetID=this.getAttribute("href");
+if(targetID==="#")return;
+const target=document.querySelector(targetID);
+if(target){
+e.preventDefault();
+target.scrollIntoView({behavior:"smooth",block:"start"});
+}
+});
 });
 
-observer.observe(counterSection);
+const navbar=document.querySelector(".navbar");
+
+if(navbar){
+const updateNavbar=()=>{
+if(window.scrollY>20){
+navbar.classList.add("scrolled");
+}else{
+navbar.classList.remove("scrolled");
+}
+};
+window.addEventListener("scroll",updateNavbar,{passive:true});
+updateNavbar();
+}
